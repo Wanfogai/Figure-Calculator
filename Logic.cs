@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using static System.Console;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Figure_Calculator
 {   
@@ -134,21 +135,21 @@ namespace Figure_Calculator
                     case "7":
                         try
                         {
-                            _functions.WriteToFile(_shapes, @"..\..\Source\Shapes\Shape.json");
+                            _functions.WriteToFile(_shapes, AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
                             _functions.WriteLineColor("Shapes saved successfully :)", ConsoleColor.Green);
                             ReadKey();
                         }
                         catch (Exception)
                         {
-                            _functions.WriteLineColor("Failed to save shapes :(", ConsoleColor.Red);
-                            ReadKey();
+                             _functions.WriteLineColor("Failed to save shapes :(", ConsoleColor.Red);
+                             ReadKey();
                             break;
                         }
                         break;
                     case "8":
                         try
                         {
-                            _functions.UploadShapes(ref _shapes, @"..\..\Source\Shapes\Shape.json");
+                            _functions.UploadShapes(ref _shapes, AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
                             _functions.WriteLineColor("The shapes are loaded :)", ConsoleColor.Green);
                             ReadKey();
                         }
