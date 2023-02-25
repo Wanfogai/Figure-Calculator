@@ -28,4 +28,4 @@ There are 4 shapes available:
 8.The command loading shapes from the list.  
 After loading, replaces the shapes that were entered earlier  
 	 
-9.Clears the list of all shapes  
+9.The command of clears the list of all shapes  
