@@ -134,7 +134,7 @@ namespace Figure_Calculator
                     case "7":
                         try
                         {
-                            _functions.WriteToFile(_shapes, AppDomain.CurrentDomain.BaseDirectory+"Shape.json");
+                            _functions.WriteToFile(_shapes, @"..\..\Shapes\Shape.json");
                             _functions.WriteLineColor("Shapes saved successfully :)", ConsoleColor.Green);
                             ReadKey();
                         }
@@ -148,7 +148,7 @@ namespace Figure_Calculator
                     case "8":
                         try
                         {
-                            _functions.UploadShapes(ref _shapes, AppDomain.CurrentDomain.BaseDirectory +"Shape.json");
+                            _functions.UploadShapes(ref _shapes, @"..\..\Shapes\Shape.json");
                             _functions.WriteLineColor("The shapes are loaded :)", ConsoleColor.Green);
                             ReadKey();
                         }
