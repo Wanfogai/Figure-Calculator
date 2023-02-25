@@ -11,8 +11,7 @@ using static System.Console;
 namespace Figure_Calculator
 {
     class Init
-    {
-        //Made by Wanfogai
+    { //Made by Wanfogai
         static void Main(string[] args)
         {
             ForegroundColor = ConsoleColor.White;
