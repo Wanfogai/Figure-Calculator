@@ -36,18 +36,18 @@ namespace Figure_Calculator
             {
                 Clear();
                 _functions.WriteLineColor("Available commands :",ConsoleColor.Yellow);
-                _functions.WriteLineColor("1)Add a shape",ConsoleColor.DarkGreen);
+                _functions.WriteLineColor("1)Add a shape",ConsoleColor.Cyan);
                 _functions.WriteLineColor("2)Output a list of shapes",ConsoleColor.Cyan);
-                _functions.WriteLineColor("3)The common area of all shapes",ConsoleColor.Blue);
-                _functions.WriteLineColor("4)The common perimeter of all shapes",ConsoleColor.Blue);
-                _functions.WriteLineColor("5)The area of the figure",ConsoleColor.DarkCyan);
-                _functions.WriteLineColor("6)The perimeter of the figure", ConsoleColor.DarkCyan);
-                _functions.WriteLineColor("7)Save all shapes",ConsoleColor.Green);
-                _functions.WriteLineColor("8)Upload Shapes",ConsoleColor.DarkYellow);
-                _functions.WriteLineColor("9)Clear the list of shapes",ConsoleColor.Red);
+                _functions.WriteLineColor("3)The common area of all shapes",ConsoleColor.Cyan);
+                _functions.WriteLineColor("4)The common perimeter of all shapes",ConsoleColor.Cyan);
+                _functions.WriteLineColor("5)The area of the figure",ConsoleColor.Cyan);
+                _functions.WriteLineColor("6)The perimeter of the figure", ConsoleColor.Cyan);
+                _functions.WriteLineColor("7)Save all shapes",ConsoleColor.Cyan);
+                _functions.WriteLineColor("8)Upload Shapes",ConsoleColor.Cyan);
+                _functions.WriteLineColor("9)Clear the list of shapes",ConsoleColor.Cyan);
                 _functions.WriteLineColor("10)Exit",ConsoleColor.DarkRed);
                 WriteLine(); 
-                _functions.WriteColor("Enter the command : ",ConsoleColor.Blue);
+                _functions.WriteColor("Enter the command : ",ConsoleColor.DarkGray);
                 comand = ReadLine();
                 switch (comand) 
                 {
@@ -72,7 +72,7 @@ namespace Figure_Calculator
                         try
                         {
                             int shape;
-                            _functions.WriteColor("Enter the shape number : ",ConsoleColor.Cyan);
+                            _functions.WriteColor("Enter the shape number : ",ConsoleColor.DarkGray);
                             shape = Convert.ToInt32(ReadLine());
                             if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Circle{shape-1}")
                             {
@@ -104,7 +104,7 @@ namespace Figure_Calculator
                         try
                         {
                             int shape;
-                            _functions.WriteColor("Enter the shape number : ",ConsoleColor.Blue);
+                            _functions.WriteColor("Enter the shape number : ",ConsoleColor.DarkGray);
                             shape = Convert.ToInt32(ReadLine());
                             if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Circle{shape - 1}")
                             {

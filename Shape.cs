@@ -34,12 +34,13 @@ namespace Figure_Calculator
         {
             string comand;
             Clear();
-            _functions.WriteLineColor("Add a shape:",ConsoleColor.Cyan);
-            _functions.WriteLineColor("1)Circle",ConsoleColor.Yellow);
-            _functions.WriteLineColor("2)Rectangle", ConsoleColor.DarkCyan);
-            _functions.WriteLineColor("3)Square", ConsoleColor.Blue);
-            _functions.WriteLineColor("4)Triangle", ConsoleColor.DarkGreen);
-            _functions.WriteColor("Write shape number : ",ConsoleColor.Blue);
+            _functions.WriteLineColor("Add a shape:",ConsoleColor.Yellow);
+            _functions.WriteLineColor("1)Circle",ConsoleColor.Cyan);
+            _functions.WriteLineColor("2)Rectangle", ConsoleColor.Cyan);
+            _functions.WriteLineColor("3)Square", ConsoleColor.Cyan);
+            _functions.WriteLineColor("4)Triangle", ConsoleColor.Cyan);
+            WriteLine();
+            _functions.WriteColor("Write shape number : ",ConsoleColor.DarkGray);
             comand = ReadLine();
             switch (comand)
             {
@@ -50,7 +51,7 @@ namespace Figure_Calculator
                         Circle[] circle = new Circle[Circles.Length+1];
                         Circles.CopyTo(circle, 0);
 
-                        _functions.WriteColor("Enter the radius of the circle : ",ConsoleColor.Cyan);
+                        _functions.WriteColor("Enter the radius of the circle : ",ConsoleColor.DarkGray);
                         circle[circle.Length - 1] = new Circle();
                         circle[circle.Length - 1].Radius = Convert.ToSingle(ReadLine());
 
@@ -76,9 +77,9 @@ namespace Figure_Calculator
 
                         rectangle[rectangle.Length - 1] = new Rectangle();
 
-                        _functions.WriteColor("Enter side A : ",ConsoleColor.Blue);
+                        _functions.WriteColor("Enter side A : ",ConsoleColor.DarkGray);
                         rectangle[rectangle.Length-1].SideA = Convert.ToSingle(ReadLine());
-                        _functions.WriteColor("Enter side B : ",ConsoleColor.Blue);
+                        _functions.WriteColor("Enter side B : ",ConsoleColor.DarkGray);
                         rectangle[rectangle.Length-1].SideB = Convert.ToSingle(ReadLine());
 
                         ShapeDic.Add($"Rectangle{ShapeDic.Count}", rectangle.Length - 1);
@@ -102,7 +103,7 @@ namespace Figure_Calculator
 
                         
 
-                        _functions.WriteColor("Enter the side of the square : ", ConsoleColor.Blue);
+                        _functions.WriteColor("Enter the side of the square : ", ConsoleColor.DarkGray);
                         square[square.Length - 1] = new Square(Convert.ToSingle(ReadLine()));
 
                         ShapeDic.Add($"Square{ShapeDic.Count}", square.Length - 1);
@@ -126,11 +127,11 @@ namespace Figure_Calculator
 
                         triangle[triangle.Length - 1] = new Triangle();
 
-                        _functions.WriteColor("Enter side A : ", ConsoleColor.Blue);
+                        _functions.WriteColor("Enter side A : ", ConsoleColor.DarkGray);
                         triangle[triangle.Length-1].SideA = Convert.ToSingle(ReadLine());
-                        _functions.WriteColor("Enter side B : ", ConsoleColor.Blue);
+                        _functions.WriteColor("Enter side B : ", ConsoleColor.DarkGray);
                         triangle[triangle.Length - 1].SideB = Convert.ToSingle(ReadLine());
-                        _functions.WriteColor("Enter side C : ", ConsoleColor.Blue);
+                        _functions.WriteColor("Enter side C : ", ConsoleColor.DarkGray);
                         triangle[triangle.Length - 1].SideC = Convert.ToSingle(ReadLine());
 
                         if (triangle[triangle.Length - 1].SideA+ triangle[triangle.Length - 1].SideB>= triangle[triangle.Length - 1].SideC&& triangle[triangle.Length - 1].SideA+ triangle[triangle.Length - 1].SideC>= triangle[triangle.Length - 1].SideB&& triangle[triangle.Length - 1].SideB+ triangle[triangle.Length - 1].SideC>= triangle[triangle.Length - 1].SideA)
@@ -164,26 +165,38 @@ namespace Figure_Calculator
         public void OutputAllShapes() 
         {
             Clear();
-            for (int i = 0; i < ShapeDic.Count; i++)
+            if (ShapeDic.Count != 0)
             {
-                if (ShapeDic.ContainsKey($"Circle{i}"))
+                for (int i = 0; i < ShapeDic.Count; i++)
                 {
-                    _functions.WriteLineColor($"{i+1})Circle\n   Radius : {Circles[ShapeDic[$"Circle{i}"]].Radius}",ConsoleColor.Yellow);
+                    if (ShapeDic.ContainsKey($"Circle{i}"))
+                    {
+                        _functions.WriteLineColor($"{i + 1})Circle", ConsoleColor.Yellow);
+                        _functions.WriteLineColor($"   Radius : {Circles[ShapeDic[$"Circle{i}"]].Radius}", ConsoleColor.DarkYellow);
+                    }
+                    else if (ShapeDic.ContainsKey($"Rectangle{i}"))
+                    {
+                        _functions.WriteLineColor($"{i + 1})Rectangle", ConsoleColor.Yellow);
+                        _functions.WriteLineColor($"   Side A : {Rectangles[ShapeDic[$"Rectangle{i}"]].SideA}\n   Side B : {Rectangles[ShapeDic[$"Rectangle{i}"]].SideB}", ConsoleColor.DarkYellow);
+                    }
+                    else if (ShapeDic.ContainsKey($"Square{i}"))
+                    {
+                        _functions.WriteLineColor($"{i + 1})Square", ConsoleColor.Yellow);
+                        _functions.WriteLineColor($"   Side : {Squares[ShapeDic[$"Square{i}"]].Side}", ConsoleColor.DarkYellow);
+                    }
+                    else if (ShapeDic.ContainsKey($"Triangle{i}"))
+                    {
+                        _functions.WriteLineColor($"{i + 1})Triangle", ConsoleColor.Yellow);
+                        _functions.WriteLineColor($"   Side A : {Triangles[ShapeDic[$"Triangle{i}"]].SideA}\n   Side B : {Triangles[ShapeDic[$"Triangle{i}"]].SideB}\n   Side C : {Triangles[ShapeDic[$"Triangle{i}"]].SideC}", ConsoleColor.DarkYellow);
+                    }
+                    WriteLine();
                 }
-                else if (ShapeDic.ContainsKey($"Rectangle{i}"))
-                {
-                    _functions.WriteLineColor($"{i+1})Rectangle\n   Side A : {Rectangles[ShapeDic[$"Rectangle{i}"]].SideA}\n   Side B : {Rectangles[ShapeDic[$"Rectangle{i}"]].SideB}",ConsoleColor.DarkCyan);
-                }
-                else if (ShapeDic.ContainsKey($"Square{i}"))
-                {
-                    _functions.WriteLineColor($"{i + 1})Square\n   Side : {Squares[ShapeDic[$"Square{i}"]].Side}",ConsoleColor.Blue);
-                }
-                else if (ShapeDic.ContainsKey($"Triangle{i}"))
-                {
-                    _functions.WriteLineColor($"{i + 1})Triangle\n   Side A : {Triangles[ShapeDic[$"Triangle{i}"]].SideA}\n   Side B : {Triangles[ShapeDic[$"Triangle{i}"]].SideB}\n   Side C : {Triangles[ShapeDic[$"Triangle{i}"]].SideC}",ConsoleColor.DarkGreen);
-                }
-                WriteLine();
             }
+            else 
+            {
+                _functions.WriteLineColor("The list of figures is empty :(",ConsoleColor.Red);
+            }
+            
         }
         /// <summary>
         /// Shape cleaning function
