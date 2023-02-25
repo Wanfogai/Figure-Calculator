@@ -38,8 +38,6 @@ namespace Figure_Calculator
         /// <returns>Returns the area of the triangle</returns>
         public float Area() 
         {
-            if (SideA+SideB>=SideC&&SideB+SideC>=SideA&&SideC+SideA>=SideB)
-            {
                 if (SideA == SideB && SideB == SideC)
                 {
                     return Convert.ToSingle(Round((Pow(SideA, 2) * Sqrt(3)) / 4, 2));
@@ -65,8 +63,6 @@ namespace Figure_Calculator
                     P = (SideA + SideB + SideC) / 2;
                     return Convert.ToSingle(Round(Sqrt(P * (P - SideA) * (P - SideB) * (P - SideC)), 2));
                 }
-            }
-            return 0; 
         }
         /// <summary>
         /// The function of finding the perimeter of a triangle

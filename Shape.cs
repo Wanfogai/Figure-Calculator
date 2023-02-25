@@ -120,6 +120,7 @@ namespace Figure_Calculator
                     Clear();
                     try
                     {
+                        
                         Triangle[] triangle = new Triangle[Triangles.Length+1];
                         Triangles.CopyTo(triangle,0);
 
@@ -132,11 +133,19 @@ namespace Figure_Calculator
                         _functions.WriteColor("Enter side C : ", ConsoleColor.Blue);
                         triangle[triangle.Length - 1].SideC = Convert.ToSingle(ReadLine());
 
-                        ShapeDic.Add($"Triangle{ShapeDic.Count}", triangle.Length - 1);
+                        if (triangle[triangle.Length - 1].SideA+ triangle[triangle.Length - 1].SideB>= triangle[triangle.Length - 1].SideC&& triangle[triangle.Length - 1].SideA+ triangle[triangle.Length - 1].SideC>= triangle[triangle.Length - 1].SideB&& triangle[triangle.Length - 1].SideB+ triangle[triangle.Length - 1].SideC>= triangle[triangle.Length - 1].SideA)
+                        {
+                            ShapeDic.Add($"Triangle{ShapeDic.Count}", triangle.Length - 1);
 
-                        Triangles = triangle;
+                            Triangles = triangle;
 
-                        _functions.WriteColor("The shape has been added successfully", ConsoleColor.Green);
+                            _functions.WriteColor("The shape has been added successfully", ConsoleColor.Green);
+                            break;
+                        }
+                        else
+                        {
+                            _functions.WriteLineColor("Such a triangle cannot exist",ConsoleColor.Red);
+                        }
                         break;
                     }
                     catch (Exception)
