@@ -12,6 +12,7 @@ namespace Figure_Calculator
 {
     class Init
     {
+        //Made by Wanfogai
         static void Main(string[] args)
         {
             ForegroundColor = ConsoleColor.White;
