@@ -1,31 +1,33 @@
 # Figure Calculator
 
-The "Shape calculator" can: **find the area of a shape (Circle, rectangle, triangle, square)**, **find the perimeter**, **save the shapes you added to a file** and **load from it**
+"Калькулятор фигур" может: **найти площадь фигуры (круг, прямоугольник, треугольник, квадрат)**, **найти их периметр**, **сохранить добавленные вами фигуры в файл** и **загрузить из него**
 
 ![image](https://user-images.githubusercontent.com/81505429/221365238-b153ff59-0a97-410d-8c3f-5205f20d7af3.png)
 
-## Description of the command:
+## Описание комманд:
 
-1.Adding Shapes Command  
-There are 4 shapes available:  
-- Circle  
-- 2.Rectangle  
-- 3.Square  
-- 4.Triangle  
+1.Команда добавления фигур
+Доступно 4 фигуры:
+- 1.Круг
+- 2.Прямоугольник
+- 3.Квадрат
+- 4.Треугольник 
 	 
-2.The command to output all shapes, in the order that the user entered  
+2.Команда для вывода всех фигур в порядке, введенном пользователем
 	 
-3.The command for calculating the area of all figures in the list  
+3.Команда для вычисления площади всех фигур в списке 
 	 
-4.The command for calculating the perimeter of all shapes in the list  
+4.Команда для вычисления периметра всех фигур в списке
 	 
-5.The command for calculating the area of the shape that the user selects from the list  
+5.Команда для вычисления площади фигуры, которую пользователь выбирает из списка 
 	 
-6.The command for calculating the perimeter of the shape that the user selects from the list  
+6.Команда для вычисления периметра фигуры, которую пользователь выбирает из списка
 	 
-7.The command to save all entered shapes to a json file  
+7.Команда для сохранения всех введенных фигур в .json файл 
 	 
-8.The command loading shapes from the list.  
-After loading, replaces the shapes that were entered earlier  
+8.Команда, загружающая фигуры из списка.  
+После загрузки заменяет формы, которые были введены ранее  
 	 
-9.The command of clears the list of all shapes  
+9.Команда очищает список всех фигур   
+
+10.Комманда выхода из программы
