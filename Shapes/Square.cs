@@ -9,38 +9,38 @@ namespace Figure_Calculator
 {
     class Square
     {
-        public float Side { get; set; }
+        public double Side { get; set; }
         /// <summary>
-        /// Shape : Square
+        /// Фигура : Квадрат
         /// </summary>
-        /// <param name="Side">Side of the Square</param>
-        public Square(float Side)
+        /// <param name="Side">SСторона квадрата</param>
+        public Square(double Side)
         {
             this.Side = Side;
         }
         /// <summary>
-        /// Shape : Square
-        /// Without parameters
+        /// Фигура : Квадрат
+        /// (Без параметров)
         /// </summary>
         public Square() 
         {
 
         }
         /// <summary>
-        /// A function that performs calculations of the area of Squares
+        /// Функция, которая выполняет вычисления площади квадратов
         /// </summary>
-        /// <returns>Returns the area of the Square</returns>
-        public float Area() 
+        /// <returns>Возвращает площадь квадрата</returns>
+        public double Area() 
         {
-            return Convert.ToSingle(Round(Pow(Side,2),2));
+            return Round(Pow(Side,2),2);
         }
         /// <summary>
-        /// The function of finding the perimeter of a Square
+        /// Функция, которая выполняет вычисления периметра квадратов
         /// </summary>
-        /// <returns>Returns the perimeter of the Square</returns>
-        public float Perimeter() 
+        /// <returns>Возвращает периметр квадрата</returns>
+        public double Perimeter() 
         {
-            return Convert.ToSingle(Round(Side*4,2)); 
+            return Round(Side * 4, 2); 
         }
 
 

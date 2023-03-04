@@ -9,41 +9,41 @@ namespace Figure_Calculator
 {
     class Rectangle
     {
-        public float SideA { get; set;}
-        public float SideB { get; set;}
+        public double A { get; set;}
+        public double B { get; set;}
         /// <summary>
-        /// Shape : Rectangle
+        /// Фигура : Прямоугольник
         /// </summary>
-        /// <param name="SideA">Side A of the Rectangle</param>
-        /// <param name="SideB">Side B of the Rectangle</param>
-        public Rectangle(float SideA, float SideB) 
+        /// <param name="A">Сторона A прямоугольника</param>
+        /// <param name="B">Сторона B прямоугольника</param>
+        public Rectangle(double A, double B) 
         {
-            this.SideA = SideA;
-            this.SideB = SideB;
+            this.A = A;
+            this.B = B;
         }
         /// <summary>
-        /// Shape : Rectangle
-        /// Without parameters
+        /// Фигура : Прямоугольник
+        /// (Без параметров)
         /// </summary>
         public Rectangle() 
         {
 
         }
         /// <summary>
-        /// A function that performs calculations of the area of Rectangles
+        /// Функция, которая выполняет вычисления площади прямоугольников
         /// </summary>
-        /// <returns>Returns the area of the Rectangle</returns>
-        public float Area() 
+        /// <returns>Возвращает площадь прямоугольника</returns>
+        public double Area() 
         {
-            return Convert.ToSingle(Round(SideA*SideB,2));
+            return Round(A*B,2);
         }
         /// <summary>
-        /// The function of finding the perimeter of a Rectangle
+        /// Функция, которая выполняет вычисления периметра прямоугольников
         /// </summary>
-        /// <returns>Returns the perimeter of the Rectangle</returns>
-        public float Perimeter() 
+        /// <returns>Возвращает периметр прямоугольника</returns>
+        public double Perimeter() 
         {
-            return Convert.ToSingle(Round((SideA+SideB)*2,2));
+            return Round((A+B)*2,2);
         }
     }
 }

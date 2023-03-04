@@ -61,8 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Functions.cs" />
-    <Compile Include="Logic.cs" />
+    <Compile Include="BeautСonsole.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="Shapes\Circle.cs" />
     <Compile Include="Init.cs" />

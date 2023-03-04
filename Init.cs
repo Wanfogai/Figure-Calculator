@@ -11,12 +11,12 @@ using static System.Console;
 namespace Figure_Calculator
 {
     class Init
-    { //Made by Wanfogai
+    { //Созданно Wanfogai
         static void Main(string[] args)
         {
-            ForegroundColor = ConsoleColor.White;
-            Logic logic = new Logic();
-            logic.StartCalc(true);
+            App App = new App();
+            App.Init();
+            App.Run();
         }
     }
 }

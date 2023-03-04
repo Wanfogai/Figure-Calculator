@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +11,7 @@ namespace Figure_Calculator
 {
     class Shape
     {
-        protected Functions _functions = new Functions();
+        protected BeautСonsole _functions = new BeautСonsole();
 
         public Circle[] Circles;
         public Rectangle[] Rectangles;
@@ -17,7 +19,7 @@ namespace Figure_Calculator
         public Triangle[] Triangles;
         public Dictionary<string, int> ShapeDic;
         /// <summary>
-        /// Constructor for shapes and a list of shapes
+        /// Конструктор для фигур и список фигур
         /// </summary>
         public Shape() 
         {
@@ -28,7 +30,7 @@ namespace Figure_Calculator
             ShapeDic = new Dictionary<string, int> { };
         }
         /// <summary>
-        /// Function of adding a new shape
+        /// Функция добавления новой фигуры
         /// </summary>
         public void AddNewShape()
         {
@@ -52,9 +54,10 @@ namespace Figure_Calculator
                         Circles.CopyTo(circle, 0);
 
                         _functions.WriteColor("Enter the radius of the circle : ",ConsoleColor.DarkGray);
-                        circle[circle.Length - 1] = new Circle();
-                        circle[circle.Length - 1].Radius = Convert.ToSingle(ReadLine());
-
+                        circle[circle.Length - 1] = new Circle
+                        {
+                            Radius = Convert.ToDouble(ReadLine())
+                        };
                         ShapeDic.Add($"Circle{ShapeDic.Count}", circle.Length - 1);
 
                         Circles = circle;
@@ -78,9 +81,9 @@ namespace Figure_Calculator
                         rectangle[rectangle.Length - 1] = new Rectangle();
 
                         _functions.WriteColor("Enter side A : ",ConsoleColor.DarkGray);
-                        rectangle[rectangle.Length-1].SideA = Convert.ToSingle(ReadLine());
+                        rectangle[rectangle.Length-1].A = Convert.ToDouble(ReadLine());
                         _functions.WriteColor("Enter side B : ",ConsoleColor.DarkGray);
-                        rectangle[rectangle.Length-1].SideB = Convert.ToSingle(ReadLine());
+                        rectangle[rectangle.Length-1].B = Convert.ToDouble(ReadLine());
 
                         ShapeDic.Add($"Rectangle{ShapeDic.Count}", rectangle.Length - 1);
 
@@ -104,7 +107,7 @@ namespace Figure_Calculator
                         
 
                         _functions.WriteColor("Enter the side of the square : ", ConsoleColor.DarkGray);
-                        square[square.Length - 1] = new Square(Convert.ToSingle(ReadLine()));
+                        square[square.Length - 1] = new Square(Convert.ToDouble(ReadLine()));
 
                         ShapeDic.Add($"Square{ShapeDic.Count}", square.Length - 1);
 
@@ -128,13 +131,13 @@ namespace Figure_Calculator
                         triangle[triangle.Length - 1] = new Triangle();
 
                         _functions.WriteColor("Enter side A : ", ConsoleColor.DarkGray);
-                        triangle[triangle.Length-1].SideA = Convert.ToSingle(ReadLine());
+                        triangle[triangle.Length-1].A = Convert.ToDouble(ReadLine());
                         _functions.WriteColor("Enter side B : ", ConsoleColor.DarkGray);
-                        triangle[triangle.Length - 1].SideB = Convert.ToSingle(ReadLine());
+                        triangle[triangle.Length - 1].B = Convert.ToDouble(ReadLine());
                         _functions.WriteColor("Enter side C : ", ConsoleColor.DarkGray);
-                        triangle[triangle.Length - 1].SideC = Convert.ToSingle(ReadLine());
+                        triangle[triangle.Length - 1].C = Convert.ToDouble(ReadLine());
 
-                        if (triangle[triangle.Length - 1].SideA+ triangle[triangle.Length - 1].SideB>= triangle[triangle.Length - 1].SideC&& triangle[triangle.Length - 1].SideA+ triangle[triangle.Length - 1].SideC>= triangle[triangle.Length - 1].SideB&& triangle[triangle.Length - 1].SideB+ triangle[triangle.Length - 1].SideC>= triangle[triangle.Length - 1].SideA)
+                        if (triangle[triangle.Length - 1].IsValidate())
                         {
                             ShapeDic.Add($"Triangle{ShapeDic.Count}", triangle.Length - 1);
 
@@ -160,7 +163,7 @@ namespace Figure_Calculator
             }
         }
         /// <summary>
-        /// Function for displaying a complete list of shapes and their parameters
+        /// Функция для отображения полного списка фигур и их параметров
         /// </summary>
         public void OutputAllShapes() 
         {
@@ -177,7 +180,7 @@ namespace Figure_Calculator
                     else if (ShapeDic.ContainsKey($"Rectangle{i}"))
                     {
                         _functions.WriteLineColor($"{i + 1})Rectangle", ConsoleColor.Yellow);
-                        _functions.WriteLineColor($"   Side A : {Rectangles[ShapeDic[$"Rectangle{i}"]].SideA}\n   Side B : {Rectangles[ShapeDic[$"Rectangle{i}"]].SideB}", ConsoleColor.DarkYellow);
+                        _functions.WriteLineColor($"   Side A : {Rectangles[ShapeDic[$"Rectangle{i}"]].A}\n   Side B : {Rectangles[ShapeDic[$"Rectangle{i}"]].B}", ConsoleColor.DarkYellow);
                     }
                     else if (ShapeDic.ContainsKey($"Square{i}"))
                     {
@@ -187,7 +190,7 @@ namespace Figure_Calculator
                     else if (ShapeDic.ContainsKey($"Triangle{i}"))
                     {
                         _functions.WriteLineColor($"{i + 1})Triangle", ConsoleColor.Yellow);
-                        _functions.WriteLineColor($"   Side A : {Triangles[ShapeDic[$"Triangle{i}"]].SideA}\n   Side B : {Triangles[ShapeDic[$"Triangle{i}"]].SideB}\n   Side C : {Triangles[ShapeDic[$"Triangle{i}"]].SideC}", ConsoleColor.DarkYellow);
+                        _functions.WriteLineColor($"   Side A : {Triangles[ShapeDic[$"Triangle{i}"]].A}\n   Side B : {Triangles[ShapeDic[$"Triangle{i}"]].B}\n   Side C : {Triangles[ShapeDic[$"Triangle{i}"]].C}", ConsoleColor.DarkYellow);
                     }
                     WriteLine();
                 }
@@ -199,7 +202,7 @@ namespace Figure_Calculator
             
         }
         /// <summary>
-        /// Shape cleaning function
+        /// Функция очистки фигур
         /// </summary>
         public void ClearShapes() 
         {
@@ -211,5 +214,83 @@ namespace Figure_Calculator
             _functions.WriteLineColor("The figures have been successfully cleared",ConsoleColor.Green);
             ReadKey();
         }
+        /// <summary>
+        /// Находит общий периметр фигур
+        /// </summary>
+        /// <returns>Общий периметр фигур</returns>
+        public double PerimetrAllShape()
+        {
+            double Perimetr = 0;
+            foreach (var item in Circles)
+            {
+                Perimetr += item.Perimeter();
+            }
+            foreach (var item in Rectangles)
+            {
+                Perimetr += item.Perimeter();
+            }
+            foreach (var item in Squares)
+            {
+                Perimetr += item.Perimeter();
+            }
+            foreach (var item in Triangles)
+            {
+                Perimetr += item.Perimeter();
+            }
+            return Perimetr;
+        }
+        /// <summary>
+        /// Находит общую площадь фигур
+        /// </summary>
+        /// <returns>Общая площадь фигур</returns>
+        public double AreaAllShape()
+        {
+            double Area = 0;
+            foreach (var item in Circles)
+            {
+                Area += (!item.Equals(null)) ? item.Area() : 0;
+            }
+            foreach (var item in Rectangles)
+            {
+                Area += (!item.Equals(null)) ? item.Area() : 0;
+            }
+            foreach (var item in Squares)
+            {
+                Area += (!item.Equals(null)) ? item.Area() : 0;
+            }
+            foreach (var item in Triangles)
+            {
+                Area += (!item.Equals(null)) ? item.Area() : 0;
+            }
+            return Area;
+        }
+        /// <summary>
+        /// Записывает объект Shapes в a .json файл
+        /// </summary>
+        /// <param name="Shapes">Фигуры</param>
+        /// <param name="Path">Путь файла</param>
+        public void WriteToFile(Shape Shapes, string Path)
+        {
+            string json = JsonConvert.SerializeObject(Shapes);
+
+            File.Delete(Path);
+
+            File.AppendAllText(Path, json);
+        }
+        /// <summary>
+        /// Загружает объект Shapes из файла .json
+        /// </summary>
+        /// <param name="Shapes">Фигуры</param>
+        /// <param name="Path">Путь до файла</param>
+        public void UploadShapes(ref Shape Shapes, string Path)
+        {
+            using (StreamReader Reader = new StreamReader(Path))
+            {
+                string json = Reader.ReadToEnd();
+                json.ToArray();
+                Shapes = JsonConvert.DeserializeObject<Shape>(json);
+            }
+        }
+
     }
 }

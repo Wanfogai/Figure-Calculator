@@ -9,68 +9,67 @@ namespace Figure_Calculator
 {
     class Triangle
     {
-        public float SideA { get; set;}
-        public float SideB { get; set;}
-        public float SideC { get; set;}
+        public double A { get; set;}
+        public double B { get; set;}
+        public double C { get; set;}
         /// <summary>
-        /// Shape : Triangle
+        /// Фигура : Треугольник
         /// </summary>
-        /// <param name="SideA">Side A</param>
-        /// <param name="SideB">Side B</param>
-        /// <param name="SideC">Side C</param>
-        public Triangle(float SideA, float SideB, float SideC) 
+        /// <param name="A">Сторона A</param>
+        /// <param name="B">Сторона B</param>
+        /// <param name="C">Сторона C</param>
+        public Triangle(double A, double B, double C) 
         {
-            this.SideA = SideA;
-            this.SideB = SideB;
-            this.SideC = SideC;
+            this.A = A;
+            this.B = B;
+            this.C = C;
         }
         /// <summary>
-        /// Shape : Triangle
-        /// Without parameters
+        /// Фигура : Треугольник
+        /// (Без параметров)
         /// </summary>
         public Triangle() 
         {
 
         }
         /// <summary>
-        /// A function that performs calculations of the area of triangles
+        /// Функция, которая выполняет вычисления площади треугольников
         /// </summary>
-        /// <returns>Returns the area of the triangle</returns>
-        public float Area() 
+        /// <returns>Возвращает площадь треугольника</returns>
+        public double Area() 
         {
-                if (SideA == SideB && SideB == SideC)
+            //Проверка, каким является треугольник(Равно сторонний, равно бедренный, разно сторонний)
+                if (A == B && B == C)
                 {
-                    return Convert.ToSingle(Round((Pow(SideA, 2) * Sqrt(3)) / 4, 2));
+                    return Round((Pow(A, 2) * Sqrt(3)) / 4, 2);
                 }
-                else if (SideA == SideB || SideA == SideC || SideB == SideC)
+                else if (A == B || A == C || B == C)
                 {
-                    if (SideA == SideB)
-                    {
-                        return Convert.ToSingle(Round((Convert.ToDouble(SideC) / 4) * Sqrt(4 * Pow(SideA, 2) - Pow(SideC, 2)), 2));
-                    }
-                    else if (SideA == SideC)
-                    {
-                        return Convert.ToSingle(Round((Convert.ToDouble(SideC) / 4) * Sqrt(4 * Pow(SideA, 2) - Pow(SideC, 2)), 2));
-                    }
-                    else
-                    {
-                        return Convert.ToSingle(Round((Convert.ToDouble(SideC) / 4) * Sqrt(4 * Pow(SideA, 2) - Pow(SideC, 2)), 2));
-                    }
+                    return Round((Convert.ToDouble(C) / 4) * Sqrt(4 * Pow(A, 2) - Pow(C, 2)), 2);
                 }
                 else
                 {
-                    float P;
-                    P = (SideA + SideB + SideC) / 2;
-                    return Convert.ToSingle(Round(Sqrt(P * (P - SideA) * (P - SideB) * (P - SideC)), 2));
+                    double P;
+                    P = (A + B + C) / 2;
+                    return Round(Sqrt(P * (P - A) * (P - B) * (P - C)), 2);
                 }
         }
         /// <summary>
-        /// The function of finding the perimeter of a triangle
+        /// Функция, которая выполняет вычисления периметра треугольников
         /// </summary>
-        /// <returns>Returns the perimeter of the triangle</returns>
-        public float Perimeter() 
+        /// <returns>Возвращает периметр треугольника</returns>
+        public double Perimeter() 
         {
-            return Convert.ToSingle(Round(SideA + SideB + SideC,2));
+            return Round(A + B + C,2);
+        }
+        /// <summary>
+        /// Проверка - существует ли треугольник
+        /// </summary>
+        /// <returns>Возвращает истину или лож</returns>
+        public bool IsValidate() 
+        {
+            if (A + B >= C && A + C >= B && B + C >= A) return true;
+            else return false;
         }
 
     }

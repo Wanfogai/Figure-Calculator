@@ -12,22 +12,29 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Figure_Calculator
 {   
-    class Logic
+    class App
     {
         private Shape _shapes = new Shape();
-        private Functions _functions;
+        public BeautСonsole BeautConsole;
+        private bool IsStarted;
         /// <summary>
-        /// Logic Constructor
+        /// Логика калькулятора
         /// </summary>
-        public Logic() 
+        public App() 
         {
-            _functions = new Functions();
+            BeautConsole = new BeautСonsole();
         }
         /// <summary>
-        /// Program initialization function (start)
+        /// Метод инициализации первоначальных данных
         /// </summary>
-        /// <param name="IsStarted">Is Started</param>
-        public void StartCalc(bool IsStarted) 
+        public void Init() 
+        {
+            IsStarted = true;
+        }
+        /// <summary>
+        /// Функция старта программы
+        /// </summary>
+        public void Run() 
         {
             string comand;
             WriteLine("Welcome To 'Figure Calculator'");
@@ -36,19 +43,19 @@ namespace Figure_Calculator
             while (IsStarted)
             {
                 Clear();
-                _functions.WriteLineColor("Available commands :",ConsoleColor.Yellow);
-                _functions.WriteLineColor("1)Add a shape",ConsoleColor.Cyan);
-                _functions.WriteLineColor("2)Output a list of shapes",ConsoleColor.Cyan);
-                _functions.WriteLineColor("3)The common area of all shapes",ConsoleColor.Cyan);
-                _functions.WriteLineColor("4)The common perimeter of all shapes",ConsoleColor.Cyan);
-                _functions.WriteLineColor("5)The area of the figure",ConsoleColor.Cyan);
-                _functions.WriteLineColor("6)The perimeter of the figure", ConsoleColor.Cyan);
-                _functions.WriteLineColor("7)Save all shapes",ConsoleColor.Cyan);
-                _functions.WriteLineColor("8)Upload Shapes",ConsoleColor.Cyan);
-                _functions.WriteLineColor("9)Clear the list of shapes",ConsoleColor.Cyan);
-                _functions.WriteLineColor("10)Exit",ConsoleColor.DarkRed);
+                BeautConsole.WriteLineColor("Available commands :",ConsoleColor.Yellow);
+                BeautConsole.WriteLineColor("1)Add a shape",ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("2)Output a list of shapes",ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("3)The common area of all shapes",ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("4)The common perimeter of all shapes",ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("5)The area of the figure",ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("6)The perimeter of the figure", ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("7)Save all shapes",ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("8)Upload Shapes",ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("9)Clear the list of shapes",ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("10)Exit",ConsoleColor.DarkRed);
                 WriteLine(); 
-                _functions.WriteColor("Enter the command : ",ConsoleColor.DarkGray);
+                BeautConsole.WriteColor("Enter the command : ",ConsoleColor.DarkGray);
                 comand = ReadLine();
                 switch (comand) 
                 {
@@ -61,11 +68,11 @@ namespace Figure_Calculator
                         ReadKey();
                         break;
                     case "3":
-                        _functions.WriteLineColor($"Area of all shape : {_functions.AreaAllShape(_shapes)}",ConsoleColor.Blue);
+                        BeautConsole.WriteLineColor($"Area of all shape : {_shapes.AreaAllShape()}",ConsoleColor.Blue);
                         ReadKey();
                         break;
                     case "4":
-                        _functions.WriteLineColor($"Perimetr of all shape : {_functions.PerimetrAllShape(_shapes)}", ConsoleColor.Blue);
+                        BeautConsole.WriteLineColor($"Perimetr of all shape : {_shapes.PerimetrAllShape()}", ConsoleColor.Blue);
                         ReadKey();
                         break; 
                     case "5":
@@ -73,29 +80,29 @@ namespace Figure_Calculator
                         try
                         {
                             int shape;
-                            _functions.WriteColor("Enter the shape number : ",ConsoleColor.DarkGray);
+                            BeautConsole.WriteColor("Enter the shape number : ",ConsoleColor.DarkGray);
                             shape = Convert.ToInt32(ReadLine());
                             if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Circle{shape-1}")
                             {
-                                _functions.WriteLineColor($"The area of the {shape}th circle: {_shapes.Circles[_shapes.ShapeDic[$"Circle{shape - 1}"]].Area()}",ConsoleColor.Yellow);
+                                BeautConsole.WriteLineColor($"The area of the {shape}th circle: {_shapes.Circles[_shapes.ShapeDic[$"Circle{shape - 1}"]].Area()}",ConsoleColor.Yellow);
                             }
                             else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Rectangle{shape-1}")
                             {
-                                _functions.WriteLineColor($"The area of the {shape}th rectangle: {_shapes.Rectangles[_shapes.ShapeDic[$"Rectangle{shape - 1}"]].Area()}",ConsoleColor.DarkCyan);
+                                BeautConsole.WriteLineColor($"The area of the {shape}th rectangle: {_shapes.Rectangles[_shapes.ShapeDic[$"Rectangle{shape - 1}"]].Area()}",ConsoleColor.DarkCyan);
                             }
                             else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Square{shape - 1}")
                             {
-                                _functions.WriteLineColor($"The area of the {shape}th square: {_shapes.Squares[_shapes.ShapeDic[$"Square{shape - 1}"]].Area()}",ConsoleColor.Blue);
+                                BeautConsole.WriteLineColor($"The area of the {shape}th square: {_shapes.Squares[_shapes.ShapeDic[$"Square{shape - 1}"]].Area()}",ConsoleColor.Blue);
                             }
                             else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Triangle{shape - 1}")
                             {
-                                _functions.WriteLineColor($"The area of the {shape}th triangle: {_shapes.Triangles[_shapes.ShapeDic[$"Triangle{shape - 1}"]].Area()}",ConsoleColor.DarkGreen);
+                                BeautConsole.WriteLineColor($"The area of the {shape}th triangle: {_shapes.Triangles[_shapes.ShapeDic[$"Triangle{shape - 1}"]].Area()}",ConsoleColor.DarkGreen);
                             }
                             ReadKey();
                         }
                         catch (Exception)
                         {
-                            _functions.WriteLineColor("Error!!!",ConsoleColor.Red);
+                            BeautConsole.WriteLineColor("Error!!!",ConsoleColor.Red);
                             ReadKey();
                             break;
                         }
@@ -105,29 +112,29 @@ namespace Figure_Calculator
                         try
                         {
                             int shape;
-                            _functions.WriteColor("Enter the shape number : ",ConsoleColor.DarkGray);
+                            BeautConsole.WriteColor("Enter the shape number : ",ConsoleColor.DarkGray);
                             shape = Convert.ToInt32(ReadLine());
                             if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Circle{shape - 1}")
                             {
-                                _functions.WriteLineColor($"The perimeter of the {shape}th circle: {_shapes.Circles[_shapes.ShapeDic[$"Circle{shape - 1}"]].Perimeter()}",ConsoleColor.Yellow);
+                                BeautConsole.WriteLineColor($"The perimeter of the {shape}th circle: {_shapes.Circles[_shapes.ShapeDic[$"Circle{shape - 1}"]].Perimeter()}",ConsoleColor.Yellow);
                             }
                             else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Rectangle{shape - 1}")
                             {
-                                _functions.WriteLineColor($"The perimeter of the {shape}th rectangle: {_shapes.Rectangles[_shapes.ShapeDic[$"Rectangle{shape - 1}"]].Perimeter()}",ConsoleColor.DarkCyan);
+                                BeautConsole.WriteLineColor($"The perimeter of the {shape}th rectangle: {_shapes.Rectangles[_shapes.ShapeDic[$"Rectangle{shape - 1}"]].Perimeter()}",ConsoleColor.DarkCyan);
                             }
                             else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Square{shape - 1}")
                             {
-                                _functions.WriteLineColor($"The perimeter of the {shape}th square: {_shapes.Squares[_shapes.ShapeDic[$"Square{shape - 1}"]].Perimeter()}",ConsoleColor.Blue);
+                                BeautConsole.WriteLineColor($"The perimeter of the {shape}th square: {_shapes.Squares[_shapes.ShapeDic[$"Square{shape - 1}"]].Perimeter()}",ConsoleColor.Blue);
                             }
                             else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Triangle{shape - 1}")
                             {
-                                _functions.WriteLineColor($"The perimeter of the {shape}th triangle: {_shapes.Triangles[_shapes.ShapeDic[$"Triangle{shape - 1}"]].Perimeter()}", ConsoleColor.DarkGreen);
+                                BeautConsole.WriteLineColor($"The perimeter of the {shape}th triangle: {_shapes.Triangles[_shapes.ShapeDic[$"Triangle{shape - 1}"]].Perimeter()}", ConsoleColor.DarkGreen);
                             }
                             ReadKey();
                         }
                         catch (Exception)
                         {
-                            _functions.WriteLineColor("Error!!!",ConsoleColor.Red);
+                            BeautConsole.WriteLineColor("Error!!!",ConsoleColor.Red);
                             ReadKey();
                             break;
                         }
@@ -135,13 +142,13 @@ namespace Figure_Calculator
                     case "7":
                         try
                         {
-                            _functions.WriteToFile(_shapes, AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
-                            _functions.WriteLineColor("Shapes saved successfully :)", ConsoleColor.Green);
+                            _shapes.WriteToFile(_shapes, AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
+                            BeautConsole.WriteLineColor("Shapes saved successfully :)", ConsoleColor.Green);
                             ReadKey();
                         }
                         catch (Exception)
                         {
-                             _functions.WriteLineColor("Failed to save shapes :(", ConsoleColor.Red);
+                             BeautConsole.WriteLineColor("Failed to save shapes :(", ConsoleColor.Red);
                              ReadKey();
                             break;
                         }
@@ -149,13 +156,13 @@ namespace Figure_Calculator
                     case "8":
                         try
                         {
-                            _functions.UploadShapes(ref _shapes, AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
-                            _functions.WriteLineColor("The shapes are loaded :)", ConsoleColor.Green);
+                            _shapes.UploadShapes(ref _shapes, AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
+                            BeautConsole.WriteLineColor("The shapes are loaded :)", ConsoleColor.Green);
                             ReadKey();
                         }
                         catch (Exception)
                         {
-                            _functions.WriteLineColor("Failed to load shapes :(", ConsoleColor.Red);
+                            BeautConsole.WriteLineColor("Failed to load shapes :(", ConsoleColor.Red);
                             ReadKey();
                             break;
                         }
@@ -165,7 +172,7 @@ namespace Figure_Calculator
                         break;
                     case "10":
                         IsStarted = false;
-                        _functions.WriteLineColor("Good bye ^_^",ConsoleColor.Yellow);
+                        BeautConsole.WriteLineColor("Good bye ^_^",ConsoleColor.Yellow);
                         ReadKey();
                         break;
                     default:

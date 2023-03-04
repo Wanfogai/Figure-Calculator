@@ -10,38 +10,38 @@ namespace Figure_Calculator
 {
     class Circle
     {
-        public float Radius { get; set;}
+        public double Radius { get; set;}
         /// <summary>
-        /// Shape : Circle
+        /// Фигура : Круг
         /// </summary>
-        /// <param name="Radius">Radius of the Circle</param>
-        public Circle(float Radius) 
+        /// <param name="Radius">Радиус круга</param>
+        public Circle(double Radius) 
         {
             this.Radius = Radius;
         }
         /// <summary>
-        /// Shape : Circle
-        /// Without parameters
+        /// Фигура : Кург
+        /// (Без параметров)
         /// </summary>
         public Circle() 
         {
 
         }
         /// <summary>
-        /// A function that performs calculations of the area of Circles
+        /// Функция, которая выполняет вычисления площади окружностей
         /// </summary>
-        /// <returns>Returns the area of the Circle</returns>
-        public float Area() 
+        /// <returns>Возвращает площадь круга</returns>
+        public double Area() 
         {
-            return Convert.ToSingle(Round(PI * Pow(Radius, 2),2));
+            return Round(PI * Pow(Radius, 2),2);
         }
         /// <summary>
-        /// The function of finding the perimeter of a Circle
+        /// Функция, которая выполняет вычисления периметра окружностей
         /// </summary>
-        /// <returns>Returns the perimeter of the Circle</returns>
-        public float Perimeter() 
+        /// <returns>Возвращает периметр круга</returns>
+        public double Perimeter() 
         {
-            return Convert.ToSingle(Round(2 * PI * Radius, 2));
+            return Round(2 * PI * Radius, 2);
         }
     }
 }
