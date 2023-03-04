@@ -5,8 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using static System.Console;
 
 namespace Figure_Calculator
 {

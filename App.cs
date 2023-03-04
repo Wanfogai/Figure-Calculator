@@ -6,24 +6,15 @@ using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using static System.Console;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Figure_Calculator
 {   
     class App
     {
         private Shape _shapes = new Shape();
-        public BeautСonsole BeautConsole;
+        public BeautСonsole BeautConsole = new BeautСonsole();
         private bool IsStarted;
-        /// <summary>
-        /// Логика калькулятора
-        /// </summary>
-        public App() 
-        {
-            BeautConsole = new BeautСonsole();
-        }
         /// <summary>
         /// Метод инициализации первоначальных данных
         /// </summary>
@@ -76,68 +67,10 @@ namespace Figure_Calculator
                         ReadKey();
                         break; 
                     case "5":
-                        _shapes.OutputAllShapes();
-                        try
-                        {
-                            int shape;
-                            BeautConsole.WriteColor("Enter the shape number : ",ConsoleColor.DarkGray);
-                            shape = Convert.ToInt32(ReadLine());
-                            if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Circle{shape-1}")
-                            {
-                                BeautConsole.WriteLineColor($"The area of the {shape}th circle: {_shapes.Circles[_shapes.ShapeDic[$"Circle{shape - 1}"]].Area()}",ConsoleColor.Yellow);
-                            }
-                            else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Rectangle{shape-1}")
-                            {
-                                BeautConsole.WriteLineColor($"The area of the {shape}th rectangle: {_shapes.Rectangles[_shapes.ShapeDic[$"Rectangle{shape - 1}"]].Area()}",ConsoleColor.DarkCyan);
-                            }
-                            else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Square{shape - 1}")
-                            {
-                                BeautConsole.WriteLineColor($"The area of the {shape}th square: {_shapes.Squares[_shapes.ShapeDic[$"Square{shape - 1}"]].Area()}",ConsoleColor.Blue);
-                            }
-                            else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Triangle{shape - 1}")
-                            {
-                                BeautConsole.WriteLineColor($"The area of the {shape}th triangle: {_shapes.Triangles[_shapes.ShapeDic[$"Triangle{shape - 1}"]].Area()}",ConsoleColor.DarkGreen);
-                            }
-                            ReadKey();
-                        }
-                        catch (Exception)
-                        {
-                            BeautConsole.WriteLineColor("Error!!!",ConsoleColor.Red);
-                            ReadKey();
-                            break;
-                        }
+                        _shapes.OutputAreaShape();
                         break; 
                     case "6":
-                        _shapes.OutputAllShapes();
-                        try
-                        {
-                            int shape;
-                            BeautConsole.WriteColor("Enter the shape number : ",ConsoleColor.DarkGray);
-                            shape = Convert.ToInt32(ReadLine());
-                            if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Circle{shape - 1}")
-                            {
-                                BeautConsole.WriteLineColor($"The perimeter of the {shape}th circle: {_shapes.Circles[_shapes.ShapeDic[$"Circle{shape - 1}"]].Perimeter()}",ConsoleColor.Yellow);
-                            }
-                            else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Rectangle{shape - 1}")
-                            {
-                                BeautConsole.WriteLineColor($"The perimeter of the {shape}th rectangle: {_shapes.Rectangles[_shapes.ShapeDic[$"Rectangle{shape - 1}"]].Perimeter()}",ConsoleColor.DarkCyan);
-                            }
-                            else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Square{shape - 1}")
-                            {
-                                BeautConsole.WriteLineColor($"The perimeter of the {shape}th square: {_shapes.Squares[_shapes.ShapeDic[$"Square{shape - 1}"]].Perimeter()}",ConsoleColor.Blue);
-                            }
-                            else if (_shapes.ShapeDic.Keys.ElementAt(shape - 1) == $"Triangle{shape - 1}")
-                            {
-                                BeautConsole.WriteLineColor($"The perimeter of the {shape}th triangle: {_shapes.Triangles[_shapes.ShapeDic[$"Triangle{shape - 1}"]].Perimeter()}", ConsoleColor.DarkGreen);
-                            }
-                            ReadKey();
-                        }
-                        catch (Exception)
-                        {
-                            BeautConsole.WriteLineColor("Error!!!",ConsoleColor.Red);
-                            ReadKey();
-                            break;
-                        }
+                        _shapes.OutputPerimetrShape();
                         break;
                     case "7":
                         try
