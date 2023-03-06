@@ -15,7 +15,7 @@ namespace Figure_Calculator
         /// </summary>
         /// <param name="text">Текст, который надо вывести</param>
         /// <param name="color">Цвет текста (ConsoleColor)</param>
-        public void WriteLineColor(string text, ConsoleColor color = ConsoleColor.White) 
+        public void WriteLineColor(string text = "", ConsoleColor color = ConsoleColor.White) 
         {
             ForegroundColor = color;
             WriteLine(text);
@@ -26,7 +26,7 @@ namespace Figure_Calculator
         /// </summary>
         /// <param name="text">Текст, который надо вывести</param>
         /// <param name="color">Цвет текста (ConsoleColor)</param>
-        public void WriteColor(string text, ConsoleColor color = ConsoleColor.White)
+        public void WriteColor(string text = "", ConsoleColor color = ConsoleColor.White)
         {
             ForegroundColor = color;
             Write(text);

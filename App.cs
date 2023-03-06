@@ -75,7 +75,7 @@ namespace Figure_Calculator
                     case "7":
                         try
                         {
-                            _shapes.WriteToFile(_shapes, AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
+                            _shapes.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
                             BeautConsole.WriteLineColor("Shapes saved successfully :)", ConsoleColor.Green);
                             ReadKey();
                         }
@@ -89,7 +89,7 @@ namespace Figure_Calculator
                     case "8":
                         try
                         {
-                            _shapes.UploadShapes(ref _shapes, AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
+                            _shapes.UploadShapes( AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
                             BeautConsole.WriteLineColor("The shapes are loaded :)", ConsoleColor.Green);
                             ReadKey();
                         }

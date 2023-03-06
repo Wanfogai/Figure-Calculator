@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -11,12 +13,8 @@ namespace Figure_Calculator
 {
     class Shape
     {
+        public List<object> Shapes = new List<object>(); 
         public BeautСonsole BeautConsole = new BeautСonsole();
-        public Circle[] Circles = new Circle[] { };
-        public Rectangle[] Rectangles = new Rectangle[] { };
-        public Square[] Squares = new Square[] { };
-        public Triangle[] Triangles = new Triangle[] { };
-        public Dictionary<string, int> ShapeDic = new Dictionary<string, int> { };
         /// <summary>
         /// Функция добавления новой фигуры
         /// </summary>
@@ -38,17 +36,12 @@ namespace Figure_Calculator
                     Clear();
                     try
                     {
-                        Circle[] circle = new Circle[Circles.Length+1];
-                        Circles.CopyTo(circle, 0);
+                        Circle circle = new Circle();
 
-                        BeautConsole.WriteColor("Enter the radius of the circle : ",ConsoleColor.DarkGray);
-                        circle[circle.Length - 1] = new Circle
-                        {
-                            Radius = Convert.ToDouble(ReadLine())
-                        };
-                        ShapeDic.Add($"Circle{ShapeDic.Count}", circle.Length - 1);
+                        BeautConsole.WriteColor("Enter the radius of the circle : ", ConsoleColor.DarkGray);
+                        circle.Radius = Convert.ToDouble(ReadLine());
 
-                        Circles = circle;
+                        Shapes.Add(circle);
 
                         BeautConsole.WriteLineColor("The shape has been added successfully", ConsoleColor.Green);
                         break;
@@ -63,19 +56,14 @@ namespace Figure_Calculator
                     Clear();
                     try
                     {
-                        Rectangle[] rectangle = new Rectangle[Rectangles.Length+1];
-                        Rectangles.CopyTo(rectangle,0);
-
-                        rectangle[rectangle.Length - 1] = new Rectangle();
+                        Rectangle rectangle = new Rectangle();
 
                         BeautConsole.WriteColor("Enter side A : ",ConsoleColor.DarkGray);
-                        rectangle[rectangle.Length-1].A = Convert.ToDouble(ReadLine());
+                        rectangle.A = Convert.ToDouble(ReadLine());
                         BeautConsole.WriteColor("Enter side B : ",ConsoleColor.DarkGray);
-                        rectangle[rectangle.Length-1].B = Convert.ToDouble(ReadLine());
+                        rectangle.B = Convert.ToDouble(ReadLine());
 
-                        ShapeDic.Add($"Rectangle{ShapeDic.Count}", rectangle.Length - 1);
-
-                        Rectangles = rectangle;
+                        Shapes.Add(rectangle);
 
                         BeautConsole.WriteColor("The shape has been added successfully", ConsoleColor.Green);
                     }
@@ -89,17 +77,13 @@ namespace Figure_Calculator
                     Clear();
                     try
                     {
-                        Square[] square = new Square[Squares.Length+1];
-                        Squares.CopyTo(square,0);
-
-                        
+                        Square square = new Square();
 
                         BeautConsole.WriteColor("Enter the side of the square : ", ConsoleColor.DarkGray);
-                        square[square.Length - 1] = new Square(Convert.ToDouble(ReadLine()));
+                        square.Side = Convert.ToDouble(ReadLine());
 
-                        ShapeDic.Add($"Square{ShapeDic.Count}", square.Length - 1);
+                        Shapes.Add(square);
 
-                        Squares = square;
                         BeautConsole.WriteLineColor("The shape has been added successfully",ConsoleColor.Green);
                     }
                     catch (Exception)
@@ -113,23 +97,18 @@ namespace Figure_Calculator
                     try
                     {
                         
-                        Triangle[] triangle = new Triangle[Triangles.Length+1];
-                        Triangles.CopyTo(triangle,0);
-
-                        triangle[triangle.Length - 1] = new Triangle();
+                        Triangle triangle = new Triangle();
 
                         BeautConsole.WriteColor("Enter side A : ", ConsoleColor.DarkGray);
-                        triangle[triangle.Length-1].A = Convert.ToDouble(ReadLine());
+                        triangle.A = Convert.ToDouble(ReadLine());
                         BeautConsole.WriteColor("Enter side B : ", ConsoleColor.DarkGray);
-                        triangle[triangle.Length - 1].B = Convert.ToDouble(ReadLine());
+                        triangle.B = Convert.ToDouble(ReadLine());
                         BeautConsole.WriteColor("Enter side C : ", ConsoleColor.DarkGray);
-                        triangle[triangle.Length - 1].C = Convert.ToDouble(ReadLine());
+                        triangle.C = Convert.ToDouble(ReadLine());
 
-                        if (triangle[triangle.Length - 1].IsValidate())
+                        if (triangle.IsValidate())
                         {
-                            ShapeDic.Add($"Triangle{ShapeDic.Count}", triangle.Length - 1);
-
-                            Triangles = triangle;
+                            Shapes.Add(triangle);
 
                             BeautConsole.WriteColor("The shape has been added successfully", ConsoleColor.Green);
                             break;
@@ -156,29 +135,33 @@ namespace Figure_Calculator
         public void OutputAllShapes() 
         {
             Clear();
-            if (ShapeDic.Count != 0)
+            if (Shapes.Count != 0)
             {
-                for (int i = 0; i < ShapeDic.Count; i++)
+                for (int i = 0; i < Shapes.Count; i++)
                 {
-                    if (ShapeDic.ContainsKey($"Circle{i}"))
+                    if (Shapes[i].ToString() == typeof(Circle).FullName)
                     {
+                        Circle circle = (Circle)Shapes[i];
                         BeautConsole.WriteLineColor($"{i + 1})Circle", ConsoleColor.Yellow);
-                        BeautConsole.WriteLineColor($"   Radius : {Circles[ShapeDic[$"Circle{i}"]].Radius}", ConsoleColor.DarkYellow);
+                        BeautConsole.WriteLineColor($"   Radius : {circle.Radius}", ConsoleColor.DarkYellow);
                     }
-                    else if (ShapeDic.ContainsKey($"Rectangle{i}"))
+                    else if (Shapes[i].ToString() == typeof(Rectangle).FullName)
                     {
+                        Rectangle rectangle = (Rectangle)Shapes[i];
                         BeautConsole.WriteLineColor($"{i + 1})Rectangle", ConsoleColor.Yellow);
-                        BeautConsole.WriteLineColor($"   Side A : {Rectangles[ShapeDic[$"Rectangle{i}"]].A}\n   Side B : {Rectangles[ShapeDic[$"Rectangle{i}"]].B}", ConsoleColor.DarkYellow);
+                        BeautConsole.WriteLineColor($"   Side A : {rectangle.A}\n   Side B : {rectangle.B}", ConsoleColor.DarkYellow);
                     }
-                    else if (ShapeDic.ContainsKey($"Square{i}"))
+                    else if (Shapes[i].ToString() == typeof(Square).FullName)
                     {
+                        Square square = (Square)Shapes[i];
                         BeautConsole.WriteLineColor($"{i + 1})Square", ConsoleColor.Yellow);
-                        BeautConsole.WriteLineColor($"   Side : {Squares[ShapeDic[$"Square{i}"]].Side}", ConsoleColor.DarkYellow);
+                        BeautConsole.WriteLineColor($"   Side : {square.Side}", ConsoleColor.DarkYellow);
                     }
-                    else if (ShapeDic.ContainsKey($"Triangle{i}"))
+                    else if (Shapes[i].ToString() == typeof(Triangle).FullName)
                     {
+                        Triangle triangle = (Triangle)Shapes[i];
                         BeautConsole.WriteLineColor($"{i + 1})Triangle", ConsoleColor.Yellow);
-                        BeautConsole.WriteLineColor($"   Side A : {Triangles[ShapeDic[$"Triangle{i}"]].A}\n   Side B : {Triangles[ShapeDic[$"Triangle{i}"]].B}\n   Side C : {Triangles[ShapeDic[$"Triangle{i}"]].C}", ConsoleColor.DarkYellow);
+                        BeautConsole.WriteLineColor($"   Side A : {triangle.A}\n   Side B : {triangle.B}\n   Side C : {triangle.C}", ConsoleColor.DarkYellow);
                     }
                     WriteLine();
                 }
@@ -194,11 +177,7 @@ namespace Figure_Calculator
         /// </summary>
         public void ClearShapes() 
         {
-            ShapeDic.Clear();
-            Circles = new Circle[] { };
-            Rectangles = new Rectangle[] { };
-            Squares = new Square[] { };
-            Triangles = new Triangle[] { };
+            Shapes.Clear();
             BeautConsole.WriteLineColor("The figures have been successfully cleared",ConsoleColor.Green);
             ReadKey();
         }
@@ -209,21 +188,28 @@ namespace Figure_Calculator
         public double PerimetrAllShape()
         {
             double Perimetr = 0;
-            foreach (var item in Circles)
+            for (int i = 0; i < Shapes.Count; i++)
             {
-                Perimetr += item.Perimeter();
-            }
-            foreach (var item in Rectangles)
-            {
-                Perimetr += item.Perimeter();
-            }
-            foreach (var item in Squares)
-            {
-                Perimetr += item.Perimeter();
-            }
-            foreach (var item in Triangles)
-            {
-                Perimetr += item.Perimeter();
+                if (Shapes[i].ToString() == typeof(Circle).FullName)
+                {
+                    Circle circle = (Circle)Shapes[i];
+                    Perimetr += circle.Perimeter();
+                }
+                else if (Shapes[i].ToString() == typeof(Rectangle).FullName)
+                {
+                    Rectangle rectangle = (Rectangle)Shapes[i];
+                    Perimetr += rectangle.Perimeter();
+                }
+                else if (Shapes[i].ToString() == typeof(Square).FullName)
+                {
+                    Square square = (Square)Shapes[i];
+                    Perimetr += square.Perimeter();
+                }
+                else if (Shapes[i].ToString() == typeof(Triangle).FullName)
+                {
+                    Triangle triangle = (Triangle)Shapes[i];
+                    Perimetr += triangle.Perimeter();
+                }
             }
             return Perimetr;
         }
@@ -234,21 +220,28 @@ namespace Figure_Calculator
         public double AreaAllShape()
         {
             double Area = 0;
-            foreach (var item in Circles)
+            for (int i = 0; i < Shapes.Count; i++)
             {
-                Area += (!item.Equals(null)) ? item.Area() : 0;
-            }
-            foreach (var item in Rectangles)
-            {
-                Area += (!item.Equals(null)) ? item.Area() : 0;
-            }
-            foreach (var item in Squares)
-            {
-                Area += (!item.Equals(null)) ? item.Area() : 0;
-            }
-            foreach (var item in Triangles)
-            {
-                Area += (!item.Equals(null)) ? item.Area() : 0;
+                if (Shapes[i].ToString() == typeof(Circle).FullName)
+                {
+                    Circle circle = (Circle)Shapes[i];
+                    Area += circle.Area();
+                }
+                else if (Shapes[i].ToString() == typeof(Rectangle).FullName)
+                {
+                    Rectangle rectangle = (Rectangle)Shapes[i];
+                    Area += rectangle.Area();
+                }
+                else if (Shapes[i].ToString() == typeof(Square).FullName)
+                {
+                    Square square = (Square)Shapes[i];
+                    Area += square.Area();
+                }
+                else if (Shapes[i].ToString() == typeof(Triangle).FullName)
+                {
+                    Triangle triangle = (Triangle)Shapes[i];
+                    Area += triangle.Area();
+                }
             }
             return Area;
         }
@@ -257,9 +250,9 @@ namespace Figure_Calculator
         /// </summary>
         /// <param name="Shapes">Фигуры</param>
         /// <param name="Path">Путь файла</param>
-        public void WriteToFile(Shape Shapes, string Path)
+        public void WriteToFile( string Path)
         {
-            string json = JsonConvert.SerializeObject(Shapes);
+            string json = JsonConvert.SerializeObject(Shapes[0]);
 
             File.Delete(Path);
 
@@ -270,13 +263,13 @@ namespace Figure_Calculator
         /// </summary>
         /// <param name="Shapes">Фигуры</param>
         /// <param name="Path">Путь до файла</param>
-        public void UploadShapes(ref Shape Shapes, string Path)
+        public void UploadShapes( string Path)
         {
             using (StreamReader Reader = new StreamReader(Path))
             {
                 string json = Reader.ReadToEnd();
                 json.ToArray();
-                Shapes = JsonConvert.DeserializeObject<Shape>(json);
+                Shapes = JsonConvert.DeserializeObject<List<object>>(json);
             }
         }
         /// <summary>
@@ -286,24 +279,28 @@ namespace Figure_Calculator
         {
             OutputAllShapes();
             try
-            {
+            {     
                 BeautConsole.WriteColor("Enter the shape number : ", ConsoleColor.DarkGray);
                 int figureNumb = Convert.ToInt32(ReadLine());
-                if (ShapeDic.Keys.ElementAt(figureNumb - 1) == $"Circle{figureNumb - 1}")
+                if (Shapes[figureNumb-1].ToString() == typeof(Circle).FullName)
                 {
-                    BeautConsole.WriteLineColor($"The area of the {figureNumb}th circle: {Circles[ShapeDic[$"Circle{figureNumb - 1}"]].Area()}", ConsoleColor.Yellow);
+                    Circle circle = (Circle)Shapes[figureNumb - 1];
+                    BeautConsole.WriteLineColor($"The area of the {figureNumb}th circle: {circle.Area()}", ConsoleColor.Yellow);
                 }
-                else if (ShapeDic.Keys.ElementAt(figureNumb - 1) == $"Rectangle{figureNumb - 1}")
+                else if (Shapes[figureNumb - 1].ToString() == typeof(Rectangle).FullName)
                 {
-                    BeautConsole.WriteLineColor($"The area of the {figureNumb}th rectangle: {Rectangles[ShapeDic[$"Rectangle{figureNumb - 1}"]].Area()}", ConsoleColor.DarkCyan);
+                    Rectangle rectangle = (Rectangle)Shapes[figureNumb-1];
+                    BeautConsole.WriteLineColor($"The area of the {figureNumb}th rectangle: {rectangle.Area()}", ConsoleColor.DarkCyan);
                 }
-                else if (ShapeDic.Keys.ElementAt(figureNumb - 1) == $"Square{figureNumb - 1}")
+                else if (Shapes[figureNumb - 1].ToString() == typeof(Square).FullName)
                 {
-                    BeautConsole.WriteLineColor($"The area of the {figureNumb} th square:  {Squares[ShapeDic[$"Square{figureNumb - 1}"]].Area()}", ConsoleColor.Blue);
+                    Square square = (Square)Shapes[figureNumb-1];
+                    BeautConsole.WriteLineColor($"The area of the {figureNumb} th square: {square.Area()}", ConsoleColor.Blue);
                 }
-                else if (ShapeDic.Keys.ElementAt(figureNumb - 1) == $"Triangle{figureNumb - 1}")
+                else if (Shapes[figureNumb - 1].ToString() == typeof(Triangle).FullName)
                 {
-                    BeautConsole.WriteLineColor($"The area of the {figureNumb} th triangle:  {Triangles[ShapeDic[$"Triangle{figureNumb - 1}"]].Area()}", ConsoleColor.DarkGreen);
+                    Triangle triangle = (Triangle)Shapes[figureNumb-1];
+                    BeautConsole.WriteLineColor($"The area of the {figureNumb} th triangle: {triangle.Area()}", ConsoleColor.DarkGreen);
                 }
                 ReadKey();
             }
@@ -323,21 +320,25 @@ namespace Figure_Calculator
             {
                 BeautConsole.WriteColor("Enter the shape number : ", ConsoleColor.DarkGray);
                 int figureNumb = Convert.ToInt32(ReadLine());
-                if (ShapeDic.Keys.ElementAt(figureNumb - 1) == $"Circle{figureNumb - 1}")
+                if (Shapes[figureNumb - 1].ToString() == typeof(Circle).FullName)
                 {
-                    BeautConsole.WriteLineColor($"The perimeter of the {figureNumb}th circle: {Circles[ShapeDic[$"Circle{figureNumb - 1}"]].Perimeter()}", ConsoleColor.Yellow);
+                    Circle circle = (Circle)Shapes[figureNumb - 1];
+                    BeautConsole.WriteLineColor($"The perimetr of the {figureNumb}th circle: {circle.Perimeter()}", ConsoleColor.Yellow);
                 }
-                else if (ShapeDic.Keys.ElementAt(figureNumb - 1) == $"Rectangle{figureNumb - 1}")
+                else if (Shapes[figureNumb - 1].ToString() == typeof(Rectangle).FullName)
                 {
-                    BeautConsole.WriteLineColor($"The perimeter of the {figureNumb}th rectangle: {Rectangles[ShapeDic[$"Rectangle{figureNumb - 1}"]].Perimeter()}", ConsoleColor.DarkCyan);
+                    Rectangle rectangle = (Rectangle)Shapes[figureNumb - 1];
+                    BeautConsole.WriteLineColor($"The perimetr of the {figureNumb}th rectangle: {rectangle.Perimeter()}", ConsoleColor.DarkCyan);
                 }
-                else if (ShapeDic.Keys.ElementAt(figureNumb - 1) == $"Square{figureNumb - 1}")
+                else if (Shapes[figureNumb - 1].ToString() == typeof(Square).FullName)
                 {
-                    BeautConsole.WriteLineColor($"The perimeter of the {figureNumb}th square: {Squares[ShapeDic[$"Square{figureNumb - 1}"]].Perimeter()}", ConsoleColor.Blue);
+                    Square square = (Square)Shapes[figureNumb - 1];
+                    BeautConsole.WriteLineColor($"The perimetr of the {figureNumb} th square: {square.Perimeter()}", ConsoleColor.Blue);
                 }
-                else if (ShapeDic.Keys.ElementAt(figureNumb - 1) == $"Triangle{figureNumb - 1}")
+                else if (Shapes[figureNumb - 1].ToString() == typeof(Triangle).FullName)
                 {
-                    BeautConsole.WriteLineColor($"The perimeter of the {figureNumb}th triangle: {Triangles[ShapeDic[$"Triangle{figureNumb - 1}"]].Perimeter()}", ConsoleColor.DarkGreen);
+                    Triangle triangle = (Triangle)Shapes[figureNumb - 1];
+                    BeautConsole.WriteLineColor($"The perimetr of the {figureNumb} th triangle: {triangle.Perimeter()}", ConsoleColor.DarkGreen);
                 }
                 ReadKey();
             }
