@@ -7,7 +7,7 @@ using static System.Math;
 
 namespace Figure_Calculator
 {
-    class Triangle
+    class Triangle:Shapes
     {
         public double A { get; set;}
         public double B { get; set;}
@@ -36,7 +36,7 @@ namespace Figure_Calculator
         /// Функция, которая выполняет вычисления площади треугольников
         /// </summary>
         /// <returns>Возвращает площадь треугольника</returns>
-        public double Area() 
+        override public double Area() 
         {
             //Проверка, каким является треугольник(Равно сторонний, равно бедренный, разно сторонний)
                 if (A == B && B == C)
@@ -58,7 +58,7 @@ namespace Figure_Calculator
         /// Функция, которая выполняет вычисления периметра треугольников
         /// </summary>
         /// <returns>Возвращает периметр треугольника</returns>
-        public double Perimeter() 
+        override public double Perimeter() 
         {
             return Round(A + B + C,2);
         }

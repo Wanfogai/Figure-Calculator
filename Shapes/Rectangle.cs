@@ -7,7 +7,7 @@ using static System.Math;
 
 namespace Figure_Calculator
 {
-    class Rectangle
+    class Rectangle:Shapes
     {
         public double A { get; set;}
         public double B { get; set;}
@@ -33,7 +33,7 @@ namespace Figure_Calculator
         /// Функция, которая выполняет вычисления площади прямоугольников
         /// </summary>
         /// <returns>Возвращает площадь прямоугольника</returns>
-        public double Area() 
+        override public double Area() 
         {
             return Round(A*B,2);
         }
@@ -41,7 +41,7 @@ namespace Figure_Calculator
         /// Функция, которая выполняет вычисления периметра прямоугольников
         /// </summary>
         /// <returns>Возвращает периметр прямоугольника</returns>
-        public double Perimeter() 
+        override public double Perimeter() 
         {
             return Round((A+B)*2,2);
         }

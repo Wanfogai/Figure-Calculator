@@ -7,7 +7,7 @@ using static System.Math;
 
 namespace Figure_Calculator
 {
-    class Square
+    class Square:Shapes
     {
         public double Side { get; set; }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Figure_Calculator
         /// Функция, которая выполняет вычисления площади квадратов
         /// </summary>
         /// <returns>Возвращает площадь квадрата</returns>
-        public double Area() 
+        override public double Area() 
         {
             return Round(Pow(Side,2),2);
         }
@@ -38,7 +38,7 @@ namespace Figure_Calculator
         /// Функция, которая выполняет вычисления периметра квадратов
         /// </summary>
         /// <returns>Возвращает периметр квадрата</returns>
-        public double Perimeter() 
+        override public double Perimeter() 
         {
             return Round(Side * 4, 2); 
         }

@@ -8,7 +8,7 @@ using static System.Math;
 
 namespace Figure_Calculator
 {
-    class Circle
+    class Circle:Shapes
     {
         public double Radius { get; set;}
         /// <summary>
@@ -31,7 +31,7 @@ namespace Figure_Calculator
         /// Функция, которая выполняет вычисления площади окружностей
         /// </summary>
         /// <returns>Возвращает площадь круга</returns>
-        public double Area() 
+        override public double Area() 
         {
             return Round(PI * Pow(Radius, 2),2);
         }
@@ -39,7 +39,7 @@ namespace Figure_Calculator
         /// Функция, которая выполняет вычисления периметра окружностей
         /// </summary>
         /// <returns>Возвращает периметр круга</returns>
-        public double Perimeter() 
+        override public double Perimeter() 
         {
             return Round(2 * PI * Radius, 2);
         }
