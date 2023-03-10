@@ -1,31 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
 using static System.Console;
 
 namespace Figure_Calculator
-{   
+{
     class App
     {
-        public ShapeMethods Shapes {get;private set;} = new ShapeMethods();
+        public ShapeMethods Shapes { get; private set; } = new ShapeMethods();
         public BeautСonsole BeautConsole = new BeautСonsole();
         private bool IsStarted;
         /// <summary>
         /// Метод инициализации первоначальных данных
         /// </summary>
-        public void Init() 
+        public void Init()
         {
             IsStarted = true;
         }
         /// <summary>
         /// Функция старта программы
         /// </summary>
-        public void Run() 
+        public void Run()
         {
             WriteLine("Welcome To 'Figure Calculator'");
             WriteLine();
@@ -33,28 +26,28 @@ namespace Figure_Calculator
             while (IsStarted)
             {
                 Clear();
-                BeautConsole.WriteLineColor("Available commands :",ConsoleColor.Yellow);
-                BeautConsole.WriteLineColor("1)Add a shape",ConsoleColor.Cyan);
-                BeautConsole.WriteLineColor("2)Output a list of shapes",ConsoleColor.Cyan);
-                BeautConsole.WriteLineColor("3)The common area of all shapes",ConsoleColor.Cyan);
-                BeautConsole.WriteLineColor("4)The common perimeter of all shapes",ConsoleColor.Cyan);
-                BeautConsole.WriteLineColor("5)The area of the figure",ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("Available commands :", ConsoleColor.Yellow);
+                BeautConsole.WriteLineColor("1)Add a shape", ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("2)Output a list of shapes", ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("3)The common area of all shapes", ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("4)The common perimeter of all shapes", ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("5)The area of the figure", ConsoleColor.Cyan);
                 BeautConsole.WriteLineColor("6)The perimeter of the figure", ConsoleColor.Cyan);
-                BeautConsole.WriteLineColor("7)Save all shapes",ConsoleColor.Cyan);
-                BeautConsole.WriteLineColor("8)Upload Shapes",ConsoleColor.Cyan);
-                BeautConsole.WriteLineColor("9)Clear the list of shapes",ConsoleColor.Cyan);
-                BeautConsole.WriteLineColor("10)Exit",ConsoleColor.DarkRed);
-                WriteLine(); 
-                BeautConsole.WriteColor("Enter the command : ",ConsoleColor.DarkGray);
+                BeautConsole.WriteLineColor("7)Save all shapes", ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("8)Upload Shapes", ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("9)Clear the list of shapes", ConsoleColor.Cyan);
+                BeautConsole.WriteLineColor("10)Exit", ConsoleColor.DarkRed);
+                WriteLine();
+                BeautConsole.WriteColor("Enter the command : ", ConsoleColor.DarkGray);
                 Commands(ReadLine());
-                
+
             }
         }
         /// <summary>
         /// Метод выборра комманды из доступных
         /// </summary>
         /// <param name="command">Номер комманды</param>
-        public void Commands(string command) 
+        public void Commands(string command)
         {
             switch (command)
             {
