@@ -7,7 +7,7 @@ using static System.Math;
 
 namespace Figure_Calculator
 {
-    class Square:Shapes
+    class Square:Shape
     {
         public double Side { get; set; }
         /// <summary>
@@ -43,6 +43,10 @@ namespace Figure_Calculator
             return Round(Side * 4, 2); 
         }
 
+        public override double GetData(string DataName = "Side")
+        {
+            return Side;
+        }
 
     }
 }

@@ -7,7 +7,7 @@ using static System.Math;
 
 namespace Figure_Calculator
 {
-    class Rectangle:Shapes
+    class Rectangle:Shape
     {
         public double A { get; set;}
         public double B { get; set;}
@@ -44,6 +44,12 @@ namespace Figure_Calculator
         override public double Perimeter() 
         {
             return Round((A+B)*2,2);
+        }
+
+        public override double GetData(string DataName)
+        {
+            if (DataName.ToLower() == "a") return A;
+            else return B;
         }
     }
 }

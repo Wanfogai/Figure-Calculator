@@ -8,7 +8,7 @@ using static System.Math;
 
 namespace Figure_Calculator
 {
-    class Circle:Shapes
+    class Circle:Shape
     {
         public double Radius { get; set;}
         /// <summary>
@@ -42,6 +42,11 @@ namespace Figure_Calculator
         override public double Perimeter() 
         {
             return Round(2 * PI * Radius, 2);
+        }
+
+        public override double GetData(string DataName = "Radius")
+        {
+            return Radius;
         }
     }
 }

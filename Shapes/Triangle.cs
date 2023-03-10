@@ -7,7 +7,7 @@ using static System.Math;
 
 namespace Figure_Calculator
 {
-    class Triangle:Shapes
+    class Triangle:Shape
     {
         public double A { get; set;}
         public double B { get; set;}
@@ -71,6 +71,11 @@ namespace Figure_Calculator
             if (A + B >= C && A + C >= B && B + C >= A) return true;
             else return false;
         }
-
+        public override double GetData(string DataName)
+        {
+            if (DataName.ToLower() == "a") return A;
+            else if (DataName.ToLower() == "b") return B;
+            else return C;
+        }
     }
 }

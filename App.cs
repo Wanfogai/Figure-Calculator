@@ -12,7 +12,7 @@ namespace Figure_Calculator
 {   
     class App
     {
-        private Shape _shapes = new Shape();
+        private ShapeMethods _shapes = new ShapeMethods();
         public BeautСonsole BeautConsole = new BeautСonsole();
         private bool IsStarted;
         /// <summary>
