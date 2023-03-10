@@ -27,7 +27,6 @@ namespace Figure_Calculator
         /// </summary>
         public void Run() 
         {
-            string comand;
             WriteLine("Welcome To 'Figure Calculator'");
             WriteLine();
 
@@ -47,70 +46,78 @@ namespace Figure_Calculator
                 BeautConsole.WriteLineColor("10)Exit",ConsoleColor.DarkRed);
                 WriteLine(); 
                 BeautConsole.WriteColor("Enter the command : ",ConsoleColor.DarkGray);
-                comand = ReadLine();
-                switch (comand) 
-                {
-                    case "1":
-                        _shapes.AddNewShape();
+                Commands(ReadLine());
+                
+            }
+        }
+        /// <summary>
+        /// Метод выборра комманды из доступных
+        /// </summary>
+        /// <param name="command">Номер комманды</param>
+        public void Commands(string command) 
+        {
+            switch (command)
+            {
+                case "1":
+                    _shapes.AddNewShape();
+                    ReadKey();
+                    break;
+                case "2":
+                    _shapes.OutputAllShapes();
+                    ReadKey();
+                    break;
+                case "3":
+                    BeautConsole.WriteLineColor($"Area of all shape : {_shapes.AreaAllShape()}", ConsoleColor.Blue);
+                    ReadKey();
+                    break;
+                case "4":
+                    BeautConsole.WriteLineColor($"Perimetr of all shape : {_shapes.PerimetrAllShape()}", ConsoleColor.Blue);
+                    ReadKey();
+                    break;
+                case "5":
+                    _shapes.OutputAreaShape();
+                    break;
+                case "6":
+                    _shapes.OutputPerimetrShape();
+                    break;
+                case "7":
+                    try
+                    {
+                        _shapes.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
+                        BeautConsole.WriteLineColor("Shapes saved successfully :)", ConsoleColor.Green);
+                        ReadKey();
+                    }
+                    catch (Exception)
+                    {
+                        BeautConsole.WriteLineColor("Failed to save shapes :(", ConsoleColor.Red);
                         ReadKey();
                         break;
-                    case "2":
-                        _shapes.OutputAllShapes();
+                    }
+                    break;
+                case "8":
+                    try
+                    {
+                        _shapes.UploadShapes(AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
+                        BeautConsole.WriteLineColor("The shapes are loaded :)", ConsoleColor.Green);
+                        ReadKey();
+                    }
+                    catch (Exception)
+                    {
+                        BeautConsole.WriteLineColor("Failed to load shapes :(", ConsoleColor.Red);
                         ReadKey();
                         break;
-                    case "3":
-                        BeautConsole.WriteLineColor($"Area of all shape : {_shapes.AreaAllShape()}",ConsoleColor.Blue);
-                        ReadKey();
-                        break;
-                    case "4":
-                        BeautConsole.WriteLineColor($"Perimetr of all shape : {_shapes.PerimetrAllShape()}", ConsoleColor.Blue);
-                        ReadKey();
-                        break; 
-                    case "5":
-                        _shapes.OutputAreaShape();
-                        break; 
-                    case "6":
-                        _shapes.OutputPerimetrShape();
-                        break;
-                    case "7":
-                        try
-                        {
-                            _shapes.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
-                            BeautConsole.WriteLineColor("Shapes saved successfully :)", ConsoleColor.Green);
-                            ReadKey();
-                        }
-                        catch (Exception)
-                        {
-                             BeautConsole.WriteLineColor("Failed to save shapes :(", ConsoleColor.Red);
-                             ReadKey();
-                            break;
-                        }
-                        break;
-                    case "8":
-                        try
-                        {
-                            _shapes.UploadShapes( AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
-                            BeautConsole.WriteLineColor("The shapes are loaded :)", ConsoleColor.Green);
-                            ReadKey();
-                        }
-                        catch (Exception)
-                        {
-                            BeautConsole.WriteLineColor("Failed to load shapes :(", ConsoleColor.Red);
-                            ReadKey();
-                            break;
-                        }
-                        break;
-                    case "9":
-                        _shapes.ClearShapes();
-                        break;
-                    case "10":
-                        IsStarted = false;
-                        BeautConsole.WriteLineColor("Good bye ^_^",ConsoleColor.Yellow);
-                        ReadKey();
-                        break;
-                    default:
-                        break;
-                }
+                    }
+                    break;
+                case "9":
+                    _shapes.ClearShapes();
+                    break;
+                case "10":
+                    IsStarted = false;
+                    BeautConsole.WriteLineColor("Good bye ^_^", ConsoleColor.Yellow);
+                    ReadKey();
+                    break;
+                default:
+                    break;
             }
         }
     }
