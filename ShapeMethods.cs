@@ -206,11 +206,11 @@ namespace Figure_Calculator
         /// <param name="Path">Путь файла</param>
         public void WriteToFile(string Path)
         {
-            string json = JsonConvert.SerializeObject(ShapeList);
+            var settings = new JsonSerializerSettings();
+            settings.TypeNameHandling = TypeNameHandling.Auto;
+            string json = JsonConvert.SerializeObject(ShapeList,typeof(List<Shape>),settings);
 
-            File.Delete(Path);
-
-            File.AppendAllText(Path, json);
+            File.WriteAllText(Path, json);
         }
         /// <summary>
         /// Загружает объект Shapes из файла .json
@@ -221,8 +221,10 @@ namespace Figure_Calculator
         {
             using (StreamReader Reader = new StreamReader(Path))
             {
+                var settings = new JsonSerializerSettings();
+                settings.TypeNameHandling = TypeNameHandling.Auto;
                 string json = Reader.ReadToEnd();
-                ShapeList = JsonConvert.DeserializeObject<List<Shape>>(json);
+                ShapeList = JsonConvert.DeserializeObject<List<Shape>>(json,settings);
             }
         }
         /// <summary>
