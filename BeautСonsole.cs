@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static System.Console;
 
 namespace Figure_Calculator
@@ -15,7 +10,7 @@ namespace Figure_Calculator
         /// </summary>
         /// <param name="text">Текст, который надо вывести</param>
         /// <param name="color">Цвет текста (ConsoleColor)</param>
-        public void WriteLineColor(string text = "", ConsoleColor color = ConsoleColor.White) 
+        public void WriteLineColor(string text = "", ConsoleColor color = ConsoleColor.White)
         {
             ForegroundColor = color;
             WriteLine(text);

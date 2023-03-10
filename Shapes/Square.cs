@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Math;
+﻿using static System.Math;
 
 namespace Figure_Calculator
 {
-    class Square:Shape
+    class Square : Shape
     {
         public double Side { get; set; }
         /// <summary>
@@ -22,7 +17,7 @@ namespace Figure_Calculator
         /// Фигура : Квадрат
         /// (Без параметров)
         /// </summary>
-        public Square() 
+        public Square()
         {
 
         }
@@ -30,20 +25,19 @@ namespace Figure_Calculator
         /// Функция, которая выполняет вычисления площади квадратов
         /// </summary>
         /// <returns>Возвращает площадь квадрата</returns>
-        override public double Area() 
+        override public double Area()
         {
-            return Round(Pow(Side,2),2);
+            return Round(Pow(Side, 2), 2);
         }
         /// <summary>
         /// Функция, которая выполняет вычисления периметра квадратов
         /// </summary>
         /// <returns>Возвращает периметр квадрата</returns>
-        override public double Perimeter() 
+        override public double Perimeter()
         {
-            return Round(Side * 4, 2); 
+            return Round(Side * 4, 2);
         }
-
-        public override double GetData(string DataName = "Side")
+        public override double GetParam(string DataName = "Side")
         {
             return Side;
         }

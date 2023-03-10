@@ -12,7 +12,7 @@ namespace Figure_Calculator
 {   
     class App
     {
-        private ShapeMethods _shapes = new ShapeMethods();
+        public ShapeMethods Shapes {get;private set;} = new ShapeMethods();
         public BeautСonsole BeautConsole = new BeautСonsole();
         private bool IsStarted;
         /// <summary>
@@ -59,31 +59,31 @@ namespace Figure_Calculator
             switch (command)
             {
                 case "1":
-                    _shapes.AddNewShape();
+                    Shapes.AddNewShape();
                     ReadKey();
                     break;
                 case "2":
-                    _shapes.OutputAllShapes();
+                    Shapes.OutputAllShapes();
                     ReadKey();
                     break;
                 case "3":
-                    BeautConsole.WriteLineColor($"Area of all shape : {_shapes.AreaAllShape()}", ConsoleColor.Blue);
+                    BeautConsole.WriteLineColor($"Area of all shape : {Shapes.AreaAllShape()}", ConsoleColor.Blue);
                     ReadKey();
                     break;
                 case "4":
-                    BeautConsole.WriteLineColor($"Perimetr of all shape : {_shapes.PerimetrAllShape()}", ConsoleColor.Blue);
+                    BeautConsole.WriteLineColor($"Perimetr of all shape : {Shapes.PerimetrAllShape()}", ConsoleColor.Blue);
                     ReadKey();
                     break;
                 case "5":
-                    _shapes.OutputAreaShape();
+                    Shapes.OutputAreaShape();
                     break;
                 case "6":
-                    _shapes.OutputPerimetrShape();
+                    Shapes.OutputPerimetrShape();
                     break;
                 case "7":
                     try
                     {
-                        _shapes.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
+                        Shapes.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
                         BeautConsole.WriteLineColor("Shapes saved successfully :)", ConsoleColor.Green);
                         ReadKey();
                     }
@@ -97,7 +97,7 @@ namespace Figure_Calculator
                 case "8":
                     try
                     {
-                        _shapes.UploadShapes(AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
+                        Shapes.UploadShapes(AppDomain.CurrentDomain.BaseDirectory + "Shape.json");
                         BeautConsole.WriteLineColor("The shapes are loaded :)", ConsoleColor.Green);
                         ReadKey();
                     }
@@ -109,7 +109,7 @@ namespace Figure_Calculator
                     }
                     break;
                 case "9":
-                    _shapes.ClearShapes();
+                    Shapes.ClearShapes();
                     break;
                 case "10":
                     IsStarted = false;

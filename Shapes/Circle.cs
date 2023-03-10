@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Math;
+﻿using static System.Math;
 
 namespace Figure_Calculator
 {
-    class Circle:Shape
+    class Circle : Shape
     {
-        public double Radius { get; set;}
+        public double Radius { get; set; }
         /// <summary>
         /// Фигура : Круг
         /// </summary>
         /// <param name="Radius">Радиус круга</param>
-        public Circle(double Radius) 
+        public Circle(double Radius)
         {
             this.Radius = Radius;
         }
@@ -23,7 +17,7 @@ namespace Figure_Calculator
         /// Фигура : Кург
         /// (Без параметров)
         /// </summary>
-        public Circle() 
+        public Circle()
         {
 
         }
@@ -31,20 +25,19 @@ namespace Figure_Calculator
         /// Функция, которая выполняет вычисления площади окружностей
         /// </summary>
         /// <returns>Возвращает площадь круга</returns>
-        override public double Area() 
+        override public double Area()
         {
-            return Round(PI * Pow(Radius, 2),2);
+            return Round(PI * Pow(Radius, 2), 2);
         }
         /// <summary>
         /// Функция, которая выполняет вычисления периметра окружностей
         /// </summary>
         /// <returns>Возвращает периметр круга</returns>
-        override public double Perimeter() 
+        override public double Perimeter()
         {
             return Round(2 * PI * Radius, 2);
         }
-
-        public override double GetData(string DataName = "Radius")
+        public override double GetParam(string DataName = "Radius")
         {
             return Radius;
         }
